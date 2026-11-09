@@ -1,7 +1,7 @@
 package fr.ece.autoloc.domain;
 
 public enum VehicleCategory {
-    CITY_DWELLER,
+    CITY_CAR,
     SEDAN,
     SUV,
     UTILITY
