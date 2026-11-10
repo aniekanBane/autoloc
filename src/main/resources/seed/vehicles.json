@@ -1,0 +1,30 @@
+[
+  {
+    "registrationNumber": "AB-123-CD",
+    "make": "Renault",
+    "model": "Clio",
+    "category": "CITY_CAR",
+    "dailyRate": 30.25
+  },
+  {
+    "registrationNumber": "EF-456-GH",
+    "make": "Peugeot",
+    "model": "308",
+    "category": "SEDAN",
+    "dailyRate": 48.50
+  },
+  {
+    "registrationNumber": "IJ-789-KL",
+    "make": "Nissan",
+    "model": "Qashqai",
+    "category": "SUV",
+    "dailyRate": 75.90
+  },
+  {
+    "registrationNumber": "MN-321-QP",
+    "make": "Dacia",
+    "model": "Duster",
+    "category": "UTILITY",
+    "dailyRate": 58.00
+  }
+]
