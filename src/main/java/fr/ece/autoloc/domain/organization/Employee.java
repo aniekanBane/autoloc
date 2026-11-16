@@ -1,5 +1,6 @@
-package fr.ece.autoloc.domain;
+package fr.ece.autoloc.domain.organization;
 
+import fr.ece.autoloc.domain.shared.Person;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,6 +9,7 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "employees", indexes = {@Index(columnList = "lastName, firstName")})
@@ -17,19 +19,18 @@ public class Employee extends Person {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private EmployeeRole role;
+    private @Setter EmployeeRole role;
+
+    private Employee(String lastName, String firstName, EmployeeRole role) {
+        super(lastName, firstName);
+        this.role = role;
+    }
 
     public static Employee create(
         String lastName, 
         String firstName, 
         EmployeeRole role) {
         
-        var employee = new Employee();
-
-        employee.lastName = lastName;
-        employee.firstName = firstName;
-        employee.role = role;
-
-        return employee;
+        return new Employee(lastName, firstName, role);
     }
 }

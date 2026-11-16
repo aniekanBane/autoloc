@@ -1,4 +1,4 @@
-package fr.ece.autoloc.domain;
+package fr.ece.autoloc.domain.organization;
 
 public enum EmployeeRole {
     AGENT,

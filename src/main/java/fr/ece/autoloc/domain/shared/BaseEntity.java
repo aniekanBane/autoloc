@@ -1,23 +1,23 @@
-package fr.ece.autoloc.domain;
+package fr.ece.autoloc.domain.shared;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @MappedSuperclass
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Getter Long id;
 
-    protected BaseEntity() {
-    }
-
     @Override
     public String toString() {
-        return String.format("%s[id=%s]", this.getClass().getSimpleName(), id);
+        String className = this.getClass().getSimpleName();
+        return String.format("%s [id=%d]", className, id);
     }
 }

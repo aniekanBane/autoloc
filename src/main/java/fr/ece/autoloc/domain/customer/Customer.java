@@ -1,6 +1,8 @@
-package fr.ece.autoloc.domain;
+package fr.ece.autoloc.domain.customer;
 
 import java.time.Instant;
+
+import fr.ece.autoloc.domain.shared.Person;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,28 +23,33 @@ public class Customer extends Person {
     @Column(nullable = false, length = 25)
     private String phoneNumber;
 
-    @Column(nullable = false, length = 20)
-    private String permitNumber;
+    @Column(nullable = false, unique = true, length = 25)
+    private String licenseNumber;
 
     @Column(nullable = false, updatable = false)
     private Instant registrationDate;
+
+    private Customer(
+        String lastName, 
+        String firstName, 
+        String email, 
+        String phoneNumber, 
+        String licenseNumber) {
+
+        super(lastName, firstName);
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.licenseNumber = licenseNumber;
+        this.registrationDate = Instant.now();
+    }
 
     public static Customer create(
         String lastName, 
         String firstName, 
         String email, 
         String phoneNumber, 
-        String permitNumber) {
+        String licenseNumber) {
         
-        var customer = new Customer();
-
-        customer.lastName = lastName;
-        customer.firstName = firstName;
-        customer.email = email;
-        customer.phoneNumber = phoneNumber;
-        customer.permitNumber = permitNumber;
-        customer.registrationDate = Instant.now();
-
-        return customer;
+        return new Customer(lastName, firstName, email, phoneNumber, licenseNumber);
     }
 }

@@ -1,12 +1,15 @@
-package fr.ece.autoloc.domain;
+package fr.ece.autoloc.domain.inventory;
 
 import java.math.BigDecimal;
+
+import fr.ece.autoloc.domain.shared.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "vehicles")
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class Vehicle extends BaseEntity {
 
     @Column(nullable = false, unique = true, length = 20)
@@ -34,7 +38,7 @@ public class Vehicle extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private VehicleStatus status = VehicleStatus.AVAILABLE;
+    private VehicleStatus status;
 
     public static Vehicle create(
         String registrationNumber, 
@@ -43,14 +47,19 @@ public class Vehicle extends BaseEntity {
         VehicleCategory category,
         BigDecimal dailyRate) {
         
-        var vehicle = new Vehicle();
+        return new Vehicle(registrationNumber, make, model, category, dailyRate, 
+            VehicleStatus.AVAILABLE);
+    }
 
-        vehicle.registrationNumber = registrationNumber;
-        vehicle.make = make;
-        vehicle.model = model;
-        vehicle.category = category;
-        vehicle.dailyRate = dailyRate;
+    public void markAsRented() {
+        this.status = VehicleStatus.RENTED;
+    }
 
-        return vehicle;
+    public void markAsUnderMaintenance() {
+        this.status = VehicleStatus.MAINTENANCE;
+    }
+
+    public void markAsAvailable() {
+        this.status = VehicleStatus.AVAILABLE;
     }
 }
