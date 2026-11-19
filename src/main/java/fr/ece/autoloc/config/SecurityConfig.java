@@ -38,6 +38,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> 
             auth.requestMatchers("/api/public/**").permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/actuator/health", "/actuator/prometheus").permitAll()
                 .anyRequest().authenticated()
         ).httpBasic(basic -> {});
 
