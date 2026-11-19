@@ -11,7 +11,7 @@ This document describes the JPA fetch and cascade strategy currently used by the
 | `Vehicle` -> `Maintenance` | 1 --- * | `LAZY` | `PERSIST` | Vehicles can have many maintenance records. `Maintenance` owns the FK and is mandatory. Persisting a maintenance record is allowed to cascade from the vehicle. |
 | `Vehicle` <-> `Equipment` | * --- * | `LAZY` | None | Vehicles share equipment. `Vehicle` owns the join table. Both have independent lifecycles, so neither entity is automatically deleted with the other. |
 | `Reservation` <-> `Contract` | 1 --- 0..1 | `LAZY` | `ALL` on reservaiton side | A contract belongs to exactly one `Reservation`. `Contract` owns the FK and is mandatory and unique. Persisting and deleting a reservation may also persist and delete its contract. |
-| `Contract` -> `Payment` | 1 --- * | `LAZY` | `ALL + orphanRemoval` | `Contract.payments` is the inverse side; `Payment.contract` owns the foreign key and is mandatory. Payments are persisted and removed with their contract, and removing a payment from the collection deletes it. |
+| `Contract` -> `Payment` | 1 --- * | `LAZY` | `ALL + orphanRemoval` | Payments are made towards contracts. `Payment` owns the FK and is mandatory. Payments are persisted and removed with their contract, and removing a payment from the collection deletes it. |
 
 ## General rules
 
