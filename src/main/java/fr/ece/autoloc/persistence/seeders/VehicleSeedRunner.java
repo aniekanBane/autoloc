@@ -49,7 +49,8 @@ public class VehicleSeedRunner implements CommandLineRunner {
                 data.make(),
                 data.model(),
                 data.category(),
-                data.dailyRate()))
+                data.dailyRate(),
+                null))
             .toList();
 
         vehicleRepository.saveAll(vehicles);
