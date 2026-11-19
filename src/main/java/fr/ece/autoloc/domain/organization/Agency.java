@@ -1,8 +1,10 @@
-package fr.ece.autoloc.domain;
+package fr.ece.autoloc.domain.organization;
 
+import fr.ece.autoloc.domain.shared.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "agencies")
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class Agency extends BaseEntity {
 
     @Column(nullable = false, unique = true, length = 128)
@@ -29,13 +32,7 @@ public class Agency extends BaseEntity {
         String city, 
         String address, 
         String contactNumber) {
-        var agency = new Agency();
 
-        agency.name = name;
-        agency.city = city;
-        agency.address = address;
-        agency.contactNumber = contactNumber;
-
-        return agency;
+        return new Agency(name, city, address, contactNumber);
     }
 }

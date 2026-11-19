@@ -1,13 +1,16 @@
-package fr.ece.autoloc.domain;
+package fr.ece.autoloc.domain.billing;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+
+import fr.ece.autoloc.domain.shared.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,10 +18,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "payments")
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class Payment extends BaseEntity {
-
-    @Column(nullable = false, updatable = false, length = 64, unique = true)
-    private String transactionReference;
 
     @Column(nullable = false, updatable = false, precision = 10, scale = 2)
     private BigDecimal amount;
@@ -33,16 +34,8 @@ public class Payment extends BaseEntity {
     public static Payment create(
         BigDecimal amount, 
         Instant paymentDate, 
-        String transactionReference,
         PaymentMethod paymentMethod) {
         
-        var payment = new Payment();
-
-        payment.amount = amount;
-        payment.paymentDate = paymentDate;
-        payment.paymentMethod = paymentMethod;
-        payment.transactionReference = transactionReference;
-
-        return payment;
+        return new Payment(amount, paymentDate, paymentMethod);
     }
 }

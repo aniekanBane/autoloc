@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import fr.ece.autoloc.domain.VehicleCategory;
+import fr.ece.autoloc.domain.inventory.Vehicle;
+import fr.ece.autoloc.domain.inventory.VehicleCategory;
 import fr.ece.autoloc.persistence.repositories.VehicleRepository;
+
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
@@ -42,7 +44,7 @@ public class VehicleSeedRunner implements CommandLineRunner {
         });
 
         var vehicles = seedData.stream()
-            .map(data -> fr.ece.autoloc.domain.Vehicle.create(
+            .map(data -> Vehicle.create(
                 data.registrationNumber(),
                 data.make(),
                 data.model(),

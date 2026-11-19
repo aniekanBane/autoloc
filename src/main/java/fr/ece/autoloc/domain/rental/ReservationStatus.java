@@ -1,4 +1,4 @@
-package fr.ece.autoloc.domain;
+package fr.ece.autoloc.domain.rental;
 
 public enum ReservationStatus {
     PENDING,
