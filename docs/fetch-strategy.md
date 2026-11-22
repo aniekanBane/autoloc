@@ -2,6 +2,8 @@
 
 This document describes the JPA fetch and cascade strategy currently used by the domain entities. The owning side of each relationship is the side that contains the foreign key or join table.
 
+![Entities UML Diagram](images/entities-uml.jpg)
+
 | Association | Cardinality | Fetch | Cascade | Strategy / reason |
 | ------------- | ------------- | ------- | --------- | ------------------- |
 | `Agency` -> `Vehicle` | 1 --- * | `LAZY` | None | Vehicles are associated with an agency, but can also exist without one. `Vehicle` owns the FK and should survive agency deletion. |
